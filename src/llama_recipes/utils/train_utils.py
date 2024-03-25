@@ -320,7 +320,7 @@ def evaluation(model,train_config, eval_dataloader, local_rank, tokenizer, wandb
         dist.all_reduce(eval_loss, op=dist.ReduceOp.SUM)
 
     # Compute average loss and perplexity
-    eval_epoch_loss = eval_loss / len(eval_dataloader)
+    eval_epoch_loss = eval_loss / len(step)
     if train_config.enable_fsdp:
         eval_epoch_loss = eval_epoch_loss/world_size
     eval_ppl = torch.exp(eval_epoch_loss)
