@@ -149,6 +149,10 @@ def train(model, train_dataloader,eval_dataloader, tokenizer, optimizer, lr_sche
 
                 if train_config.save_metrics:
                     save_to_json(metrics_filename, train_step_loss, train_loss, train_step_perplexity, train_prep, val_step_loss, val_loss, val_step_perplexity, val_prep)
+
+                if step >= epoch_length - 1:
+                    break
+
             pbar.close()
 
         epoch_end_time = time.perf_counter()-epoch_start_time
